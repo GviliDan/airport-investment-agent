@@ -10,8 +10,7 @@ COPY apps/api/package.json apps/api/
 COPY apps/web/package.json apps/web/
 
 FROM manifests AS build-deps
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --workspace apps/web --workspace packages/shared --include-workspace-root
+RUN npm ci --workspace apps/web --workspace packages/shared --include-workspace-root
 
 FROM build-deps AS build
 ENV NEXT_TELEMETRY_DISABLED=1

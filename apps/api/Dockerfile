@@ -10,8 +10,7 @@ COPY apps/api/package.json apps/api/
 COPY apps/web/package.json apps/web/
 
 FROM manifests AS build-deps
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --workspace apps/api --workspace packages/shared --include-workspace-root
+RUN npm ci --workspace apps/api --workspace packages/shared --include-workspace-root
 
 FROM build-deps AS build
 COPY tsconfig.base.json ./
@@ -20,8 +19,7 @@ COPY apps/api apps/api
 RUN npm run build -w apps/api
 
 FROM manifests AS prod-deps
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev --workspace apps/api \
+RUN npm ci --omit=dev --workspace apps/api \
  && rm -rf node_modules/@airport
 
 FROM node:${NODE_VERSION}-alpine AS runtime
