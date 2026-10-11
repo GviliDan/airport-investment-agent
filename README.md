@@ -14,8 +14,8 @@ Follow-ups work conversationally ("Why is the first airport ranked above BOS?").
 
 ## Live demo
 
-- Web: <https://web-production-0cabc.up.railway.app>
-- API health: <https://api-production-2170.up.railway.app/health>
+- Web: [Live demo](https://web-production-0cabc.up.railway.app)
+- API: [Health check](https://api-production-2170.up.railway.app/health)
 
 The frontend is deployed on Railway and talks to the API server-side, so the browser never sees an API key.
 
