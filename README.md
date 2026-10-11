@@ -12,10 +12,23 @@ explanation plus structured tables and notices computed by code. It handles, for
 
 Follow-ups work conversationally ("Why is the first airport ranked above BOS?").
 
+## Live demo
+
+- Web: <https://web-production-0cabc.up.railway.app>
+- API health: <https://api-production-2170.up.railway.app/health>
+
+The frontend is deployed on Railway and talks to the API server-side, so the browser never sees an API key.
+
 ## Architecture
 
 ```
-User → Chat UI → Express API → Agent / Ollama → deterministic tools → application analytics & scoring → public aviation APIs
+User → Chat UI → Express API → Agent / Ollama
+                                    ↓
+                           deterministic tools
+                                    ↓
+                          analytics & scoring
+                                    ↓
+                        BTS / FAA / AeroDataBox
 ```
 
 Data sources (all queried at request time):
@@ -41,9 +54,9 @@ Structured artifacts are authoritative; model prose is explanatory. The UI rende
 
 ## Setup
 
-You need Node.js 22+ and npm 10+ (or Docker with Compose v2), plus two API keys and a model name:
-`OLLAMA_API_KEY` ([Ollama Cloud](https://ollama.com)), `AERODATABOX_API_KEY` (RapidAPI) and `LLM_MODEL`
-(`.env.example` already sets `gpt-oss:120b`). BTS and FAA need no credentials.
+You need Node.js 22+ and npm 10+ (or Docker with Compose v2), plus two API keys and a model name: `OLLAMA_API_KEY`
+([Ollama Cloud](https://ollama.com)), `AERODATABOX_API_KEY` (RapidAPI) and `LLM_MODEL` (preset to `gpt-oss:120b` in `.env.example`).
+BTS and FAA need no credentials.
 
 Native:
 
