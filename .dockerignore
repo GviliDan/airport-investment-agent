@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/.next
+.git
+.env
+.env.*
+!.env.example
+docs
+**/*.test.ts
+**/__tests__
+compose.yaml
+**/Dockerfile

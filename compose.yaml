@@ -1,0 +1,26 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    env_file: .env
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 20s
+    ports:
+      - "127.0.0.1:${PORT:-3001}:${PORT:-3001}" # debugging only; web reaches the API over the compose network
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    # Deliberately no env_file: the api's PORT would collide with the web server's PORT.
+    environment:
+      API_URL: ${API_URL:-http://api:3001}
+    init: true
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
